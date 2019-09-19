@@ -1,0 +1,18 @@
+<form #addpersonform>
+  <div class="form-group">
+    <label for="firstName">First Name:</label>
+    <input [(ngModel)]="person.firstName" placeholder="First Name" name="firstName" class="form-control" id="firstName">
+  </div>
+
+  <div class="form-group">
+    <label for="lastName">Last Name:</label>
+    <input [(ngModel)]="person.lastName" placeholder="Last name" name="lastName" class="form-control" id="lastName">
+  </div>
+  <div class="form-group">
+    <label for="email">Email address:</label>
+    <input type="email" [(ngModel)]="person.email" placeholder="Email" name="email" class="form-control" id="email">
+  </div>
+  
+  <!-- <button class="btn btn-success" (click)="createPerson()">Create</button> -->
+</form>
+

@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'variables';
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+
+.btn-icon{
+    padding: 0 5px;
+    font-size: 18px;
+}
+ul.ngx-pagination {
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.btn{
+    .material-icons{
+        font-size: inherit;
+        line-height: inherit;
+        position: relative;
+        top: 2px;
+    }
+}
+
+img{
+    max-width: 100%;
+}

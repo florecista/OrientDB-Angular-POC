@@ -1,0 +1,49 @@
+<h5>Study/Work</h5>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th width="20%">Start Year</th>
+            <th width="20%">End Year</th>
+            <th width="20%">Position</th>
+            <th width="20%">Company</th>
+            <th class="text-right" width="20%">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="workStudies.length == 0">
+            <td colspan="5" class="text-center">No Data</td>
+        </tr>
+        <tr *ngFor="let work of workStudies | paginate: { id: 'worksStudies', itemsPerPage: 3, currentPage: page, totalItems: workStudies.length }">
+            <td>{{work.startDate | date : 'yyyy' }}</td>
+            <td>{{work.endDate | date : 'yyyy' }}</td>
+            <td>{{work.position}}</td>
+            <td>{{work.title}}</td>
+            <td class="text-right">
+                <button class="btn-icon btn btn-primary btn-sm" (click)="editWorkStudy(work)">
+                    <i class="material-icons">edit</i>
+                </button>
+                <button class="btn-icon btn btn-danger btn-sm" (click)="deleteworkStudy(work)">
+                    <i class="material-icons">delete</i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4" *ngIf="workStudies && workStudies.length > 0">
+                <pagination-controls id="worksStudies" (pageChange)="page = $event"></pagination-controls>
+            </td>
+            <td colspan="1" class="text-right">
+                <button class="btn btn-success btn-sm" (click)="addNewStudyWork()"><i class="material-icons">add_circle</i> Add New</button>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<modal-component title="Add Work/Study" saveButtonText="Save" #add_new (onsave)="saveWorkStudy()">
+    <add-workstudy (onSave)="onSaveSuccess($event)"></add-workstudy>
+</modal-component>
+
+<modal-component title="Edit Work/Study" saveButtonText="Update" #edit (onsave)="updateWorkStudy()">
+    <edit-workstudy *ngIf="workstudy" (onUpdate)="onUpdateSuccess($event)" [workstudy]="workstudy"></edit-workstudy>
+</modal-component>

@@ -1,0 +1,45 @@
+<h5>Events</h5>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th width="20%">Date</th>
+            <th width="20%">Type</th>
+            <th width="40%">Title</th>
+            <th class="text-right" width="20%">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="events.length == 0" >
+            <td colspan="4" class="text-center">No Data</td>
+        </tr>
+        <tr *ngFor="let event of events | paginate: { id:'events', itemsPerPage: 3, currentPage: page }">
+            <td>{{event.startDatetime | date : 'd LLL'}}</td>
+            <td>{{event.type}}</td>
+            <td>{{event.title}}</td>
+            <td class="text-right">
+                <button class="btn-icon btn btn-primary btn-sm" (click)="editEvent(event)">
+                    <i class="material-icons">edit</i>
+                </button>
+                <button class="btn-icon btn btn-danger btn-sm" (click)="deleteEvent(event)">
+                    <i class="material-icons">delete</i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3"><pagination-controls id="events" (pageChange)="page = $event"></pagination-controls></td>
+            <td colspan="1" class="text-right">
+                <button class="btn btn-success btn-sm" (click)="addNewEvent()"><i class="material-icons">add_circle</i> Add New</button>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<modal-component title="Add Event" saveButtonText="Save" #add_new (onsave)="saveEvent()">
+    <add-event (onSave)="onSaveSuccess($event)"></add-event>
+</modal-component>
+
+<modal-component title="Edit Event" saveButtonText="Update" #edit (onsave)="updateEvent()">
+    <edit-event (onUpdate)="onUpdateSuccess($event)" *ngIf="event" [event]="event"></edit-event>
+</modal-component>

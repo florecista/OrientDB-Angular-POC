@@ -1,0 +1,47 @@
+<h5>Correspondences</h5>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th width="20%">Date</th>
+            <th width="20%">Type</th>
+            <th width="40%">Title</th>
+            <th class="text-right" width="20%">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="correspondences.length == 0">
+            <td colspan="5" class="text-center">No Data</td>
+        </tr>
+        <tr *ngFor="let correspondence of correspondences | paginate: {id: 'correspondences', itemsPerPage: 3, currentPage: page }">
+            <td>{{correspondence.startDate | date : 'd LLL'}}</td>
+            <td>{{correspondence.type}}</td>
+            <td>{{correspondence.title}}</td>
+            <td class="text-right">
+                <button class="btn-icon btn btn-primary btn-sm" (click)="editCorrespondence(correspondence)">
+                    <i class="material-icons">edit</i>
+                </button>
+                <button class="btn-icon btn btn-danger btn-sm" (click)="deleteCorrespondence(correspondence)">
+                    <i class="material-icons">delete</i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3">
+                <pagination-controls id="correspondences" (pageChange)="page = $event"></pagination-controls>
+            </td>
+            <td colspan="1" class="text-right">
+                <button class="btn btn-success btn-sm" (click)="addNewCorrespondence()"><i class="material-icons">add_circle</i> Add New</button>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<modal-component title="Add Correspondence" saveButtonText="Save" #add_new (onsave)="saveCorrespondence()">
+    <add-correspondence (onSave)="onSaveSuccess($event)"></add-correspondence>
+</modal-component>
+
+<modal-component title="Edit Correspondence" saveButtonText="Update" #edit (onsave)="updateCorrespondence()">
+    <edit-correspondence (onUpdate)="onUpdateSuccess($event)" *ngIf="correspondence" [correspondence]="correspondence"></edit-correspondence>
+</modal-component>

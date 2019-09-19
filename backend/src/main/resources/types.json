@@ -1,0 +1,100 @@
+[
+  {
+    "name": "Person",
+    "category": "Vertex",
+    "attributes": [
+      {
+        "name": "firstName",
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "lastName",
+        "type": "string",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Event",
+    "category": "Vertex",
+    "attributes": [
+      {
+        "name": "type",
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "notes",
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "datetime",
+        "type": "date",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Address",
+    "category": "Vertex",
+    "attributes": [
+      {
+        "name": "streetName",
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "streetType",
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "suburb",
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "postcode",
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "country",
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "fromDate",
+        "type": "date",
+        "description": ""
+      },
+      {
+        "name": "toDate",
+        "type": "date",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Suspected",
+    "category": "Edge",
+    "attributes": []
+  },
+  {
+    "name": "Confirmed",
+    "category": "Edge",
+    "attributes": []
+  }
+]

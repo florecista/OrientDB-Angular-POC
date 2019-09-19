@@ -1,0 +1,54 @@
+
+<h3 class="mt-4 mb-3">Person Details</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th class="d-none">Id</th>
+      <th>FirstName</th>
+      <th>LastName</th>
+      <th>Email</th>
+      <th class="text-right">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="persons && persons.length == 0">
+      <td colspan="5" class="text-center">No Data</td>
+    </tr>
+    <tr *ngFor="let person of persons | paginate: { itemsPerPage: 10, currentPage: p }">
+      <td class="d-none">{{person.id}}</td>
+      <td>{{person.firstName}}</td>
+      <td>{{person.lastName}}</td>
+      <td>{{person.email}}</td>
+      <td class="text-right">
+        <a class="btn-icon btn btn-primary btn-sm" routerLink="/persons/{{person.id}}">
+              <i class="material-icons">remove_red_eye</i>
+        </a>
+        <!-- <button class="btn-icon btn btn-primary btn-sm" (click)="editPerson(person)">
+          <i class="material-icons">edit</i>
+        </button> -->
+        <button class="btn-icon btn btn-danger btn-sm" (click)="delete(person)">
+          <i class="material-icons">delete</i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3" style="vertical-align: middle">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </td>
+      <td colspan="1" class="text-right">
+        <button class="btn btn-success btn-sm" (click)="createPerson()"><i class="material-icons">add_circle</i> Add New</button>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+
+
+<modal-component title="Add Person" saveButtonText="Save" #add_person (onsave)="savePerson()">
+  <add-person (added)="onPersonAdded($event)"></add-person>
+</modal-component>
+
+

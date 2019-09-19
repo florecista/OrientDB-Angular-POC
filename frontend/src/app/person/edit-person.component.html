@@ -1,0 +1,35 @@
+<form>
+    <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input [(ngModel)]="person.firstName" placeholder="First Name" name="firstName" class="form-control" id="firstName">
+    </div>
+
+    <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input [(ngModel)]="person.lastName" placeholder="Last name" name="lastName" class="form-control" id="lastName">
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email address:</label>
+        <input type="email" [(ngModel)]="person.email" placeholder="Email" name="email" class="form-control" id="email">
+    </div>
+
+    <div class="form-group">
+        <label for="email">Date of birth</label>
+        <div class="input-group">
+            <input class="form-control" placeholder="Select a date" ngx-mydatepicker name="dateOfBirth"
+                [(ngModel)]="dateOfBirth" [options]="datePickerOptions" #dp="ngx-mydatepicker" (dateChanged)="onDateChanged($event)"/>
+            <div class="input-group-append">
+                <button (click)="dp.toggleCalendar()" class="btn btn-icon btn-outline-secondary pl-2 pr-2" type="button">
+                    <i class="material-icons">
+                        calendar_today
+                    </i>
+                </button>
+            </div>
+        </div>
+        
+    </div>
+      
+    <!-- <button class="btn btn-success" (click)="createPerson()">Update</button> -->
+
+</form>

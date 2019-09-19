@@ -1,0 +1,44 @@
+<section class="mt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 pl-0">
+                <img class="profile-image" src="assets/images/person.jpg" alt="" />
+            </div>
+            <div class="col-md-6">
+                <div class="person-details" *ngIf="person">
+                    <div class="name"><strong>{{person.firstName}} {{person.lastName}}</strong></div>
+                    <div *ngIf="person.address" class="address mt-1">
+                        <p>{{person.address.streetNumber}} {{person.address.streetName}} {{person.address.streetType}}<br/>
+                        {{person.address.suburb}} {{person.address.state}} {{person.address.postcode}}<br/>
+                        {{person.address.country}}</p>
+                    </div>
+                    <div class="dob" *ngIf="person.dateOfBirth">
+                        <strong>DOB: </strong> {{person.dateOfBirth}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-right pr-0">
+                <button class="btn btn-primary" (click)="editPerson()">
+                    Edit
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="mt-4" *ngIf="person && person.workStudies">
+    <person-details-workstudy (success)="onProfileUpdated()" [person]="person"></person-details-workstudy>
+</section>
+
+<section class="mt-5" *ngIf="person && person.events">
+    <person-details-events (success)="onProfileUpdated()" [person]="person"></person-details-events>
+</section>
+
+<section class="mt-5" *ngIf="person && person.correspondences">
+    <person-details-correspondences (success)="onProfileUpdated()" [person]="person"></person-details-correspondences>
+</section>
+
+<modal-component *ngIf="person" title="Edit Person" saveButtonText="Update" #edit_person (onsave)="updatePerson()">
+    <edit-person [person]="person" (onsave)="onUpdateSuccess($event)"></edit-person>
+</modal-component>
