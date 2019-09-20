@@ -1,6 +1,5 @@
 package socialnetwork.utils;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.orientechnologies.orient.core.id.ORecordId;
 import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
@@ -8,49 +7,17 @@ import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.orient.OrientVertex;
 import socialnetwork.view.model.*;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Util {
-    public static void main(String[] args) throws Exception {
-        Person person = new Person("John", "Smith", "test@test.com","/var/temp/image001.png", new Date());
-        person.setDateOfBirth(getDateForString("31-08-1982"));
-        Address address = new Address();
-        address.setStreetNumber("99");
-        address.setStreetName("Fuller");
-        address.setStreetType(Address.StreetType.ROAD);
-        address.setSuburb("Windsor");
-        address.setPostcode("40303");
-        address.setState("MA");
-        address.setCountry("USA");
-        address.setFromDate(getDateForString("01-10-1992"));
-        address.setToDate(getDateForString("31-12-2018"));
-        person.setAddress(address);
-
-        person.getEvents().add(new Event(Event.EventType.BORN, "Test Event", "Some notes", getDateForString("31-08-1982"), getDateForString("31-08-1982")));
-        person.getEvents().add(new Event(Event.EventType.MARRIED, "Test Event", "Some notes", getDateForString("03-03-2006"), getDateForString("03-03-2006")));
-        person.getCorrespondences().add(new Correspondence(Correspondence.CorrespondenceType.PHONE, "Test call", "Just some conversation notes", new Date(), new Date()));
-        person.getWorkStudies().add(new WorkStudy(WorkStudy.WorkStudyType.WORK, "IBM", "Java programmer", new Date(), new Date(), new Address("10", "Easy", Address.StreetType.STREET, "Meadowlands", "40000", "VA", "USA", new Date(), new Date())));
-
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonInString = mapper.writeValueAsString(person);
-        System.out.println(jsonInString);
-    }
-
-    public static Date getDateForString(String dateOfBirthString) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
-        Date dateOfBirth = null;
-        try {
-            dateOfBirth = sdf.parse(dateOfBirthString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return dateOfBirth;
+    public static Date getDateForString(String dateOfBirthString) throws Exception {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return sdf.parse(dateOfBirthString);
     }
 
     public static String getStringForDate(Date paramDate) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         return sdf.format(paramDate);
     }
 
