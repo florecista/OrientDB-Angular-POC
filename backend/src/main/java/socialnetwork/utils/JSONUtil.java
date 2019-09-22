@@ -10,7 +10,7 @@ import java.net.URL;
 import java.util.List;
 
 public class JSONUtil {
-    public List getEntityList() {
+    public List<Entity> getEntityList() {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             BufferedReader br = null;
