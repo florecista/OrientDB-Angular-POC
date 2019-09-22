@@ -7,12 +7,22 @@ import org.junit.Test;
 import java.util.List;
 
 import static junit.framework.TestCase.assertNotNull;
+import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 
 public class TestJSONUtil {
     @Test
     public void testGetEntityList() {
+        JSONUtil jsonUtil = new JSONUtil();
+        List<Entity> entities = jsonUtil.getEntityList();
+        assertNotNull(entities);
+        assertThat(entities, IsNot.not(IsEmptyCollection.empty()));
+        assertThat(entities, hasSize(5));
+    }
+
+    @Test
+    public void testGetEntityList2() {
         SubEntity firstNameSubEntity = new SubEntity("firstName", "string", "", null);
         SubEntity lastNameSubEntity = new SubEntity("lastName", "string", "", null);
         Entity personEntity = new Entity();
@@ -26,5 +36,7 @@ public class TestJSONUtil {
         assertNotNull(entities);
         assertThat(entities, IsNot.not(IsEmptyCollection.empty()));
         assertThat(entities, hasSize(5));
+        // Test collection has an item I was expecting
+        assertThat(entities, hasItem(personEntity));
     }
 }
